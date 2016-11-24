@@ -1,3 +1,4 @@
 [package]
-version = 1.0.0
+description = Modified version of scan.bro to add destination IP sampling.
+tags = sumstats
 script_dir = scripts
