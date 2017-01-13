@@ -4,7 +4,9 @@
 #            Seth Hall
 #            All the authors of the old scan.bro
 
-# Modified by Jon Zeolla to add destination sampling
+# Modified by Jon Zeolla to add destination sampling and suppression modifications
+# for Scan::Address_Scan based on both src IP and dst port to allow you to take action
+# via a notice hook only on scans of certain destination ports.
 
 @load base/frameworks/notice
 @load base/frameworks/sumstats
@@ -86,7 +88,7 @@ event bro_init() &priority=5
 	                  	        $p=to_port(key$str),
 	                  	        $sub=sub_msg,
 	                  	        $msg=message,
-	                  	        $identifier=cat(key$host)]);
+	                  	        $identifier=cat(key$host,key$str)]);
 	                  	}]);
 
 	# Note: port scans are tracked similar to: table[src_ip, dst_ip] of set(port);
